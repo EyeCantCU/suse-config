@@ -9,6 +9,9 @@ flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flath
 . remove.sh
 . install.sh
 
+# Setup wayland session
+sudo cp etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
+
 while true; do
     read -p "Setup for laptop? " yn
     case $yn in
