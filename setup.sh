@@ -12,6 +12,10 @@ flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flath
 # Setup wayland session
 sudo cp etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
 
+# Autologin
+echo -e "[Autologin]\nUser=$USER\nSession=plasmawayland" | sudo tee -a /etc/sddm.conf.d/autologin.conf > /dev/null
+
+# Laptop setup
 while true; do
     read -p "Setup for laptop? " yn
     case $yn in
