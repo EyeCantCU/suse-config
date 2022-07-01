@@ -15,6 +15,16 @@ sudo cp conf/etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
 # Autologin
 echo -e "[Autologin]\nUser=$USER\nSession=plasmawayland" | sudo tee -a /etc/sddm.conf.d/autologin.conf > /dev/null
 
+# Ham radio setup
+while true; do
+    read -p "Setup for ham radio? " yn
+    case $yn in
+        [Yy]* ) . scripts/ham.sh; break;;
+        [Nn]* ) break;;
+        * ) echo "Invalid option. Input yes (y) or no (n).";;
+    esac
+done
+
 # Laptop setup
 while true; do
     read -p "Setup for laptop? " yn
