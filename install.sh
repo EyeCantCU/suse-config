@@ -12,5 +12,8 @@ opi brave
 sudo zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
 sudo zypper in x11-video-nvidiaG06 x11-video-nvidiaG06-32bit nvidia-glG06 nvidia-glG06-32bit nvidia-computeG06 nvidia-computeG06-32bit libnvidia-egl-wayland1 libnvidia-egl-wayland1-32bit
 
+# Needed for full modmic functionality
+sudo zypper in alsa-firmware
+
 # Steam
 sudo zypper in steam
