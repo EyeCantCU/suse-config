@@ -15,9 +15,6 @@ sudo zypper in x11-video-nvidiaG06 x11-video-nvidiaG06-32bit nvidia-glG06 nvidia
 # Needed for full modmic functionality
 sudo zypper in alsa-firmware
 
-# Steam
-sudo zypper in steam
-
 # Android
 sudo zypper in android-tools android-udev-rules
 

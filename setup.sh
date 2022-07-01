@@ -34,3 +34,13 @@ while true; do
         * ) echo "Invalid option. Input yes (y) or no (n).";;
     esac
 done
+
+# Steam
+while true; do
+    read -p "Setup Steam? " yn
+    case $yn in
+        [Yy]* ) . scripts/steam.sh; break;;
+        [Nn]* ) break;;
+        * ) echo "Invalid option. Input yes (y) or no (n).";;
+    esac
+done
