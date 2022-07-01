@@ -4,7 +4,7 @@
 sudo zypper dup
 
 # Now the rest
-sudo zypper in calibre opi xbindkeys
+sudo zypper in opi
 opi codecs
 opi brave
 
