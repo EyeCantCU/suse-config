@@ -18,5 +18,8 @@ sudo zypper in alsa-firmware
 # Steam
 sudo zypper in steam
 
+# Android
+sudo zypper in android-tools android-udev-rules
+
 # Flatpak
 flatpak install tidal-hifi
