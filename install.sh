@@ -17,3 +17,6 @@ sudo zypper in alsa-firmware
 
 # Steam
 sudo zypper in steam
+
+# Flatpak
+flatpak install tidal-hifi
