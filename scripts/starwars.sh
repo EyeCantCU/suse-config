@@ -1,3 +1,6 @@
 # Telnet Star Wars
+echo Installing telnet...
 sudo zypper in telnet
+
+echo Starting Star Wars...
 telnet towel.blinkenlights.nl

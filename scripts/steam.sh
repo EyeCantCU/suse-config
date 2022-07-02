@@ -1,4 +1,5 @@
 # Steam
+echo Installing Steam...
 sudo zypper in steam
 
 # Proton

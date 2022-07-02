@@ -1,2 +1,3 @@
 # Remove firefox
+echo Removing Firefox...
 sudo zypper rm firefox
