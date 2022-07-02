@@ -12,5 +12,8 @@
 
 test -s ~/.alias && . ~/.alias || true
 
+# Add ~/.local/bin to path
+export PATH=/home/$USER/.local/bin:$PATH
+
 # Set default text editor to nano
 export EDITOR=nano
