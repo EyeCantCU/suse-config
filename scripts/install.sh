@@ -25,6 +25,10 @@ sudo zypper in alsa-firmware
 echo Installing android tools...
 sudo zypper in android-tools android-udev-rules
 
+# ProtonVPN
+echo Installing ProtonVPN...
+sudo zypper in protonvpn-gui
+
 # Flatpak
 echo Installing Tidal...
 flatpak install tidal-hifi
