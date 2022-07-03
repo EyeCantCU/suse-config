@@ -25,6 +25,16 @@ sudo zypper in alsa-firmware
 echo Installing android tools...
 sudo zypper in android-tools android-udev-rules
 
+# VS Code
+while true; do
+    read -p "Install VS Code? " yn
+    case $yn in
+        [Yy]* ) opi vscode; break;;
+        [Nn]* ) break;;
+        * ) echo "Invalid option. Input yes (y) or no (n).";;
+    esac
+done
+
 # ProtonVPN
 echo Installing ProtonVPN...
 sudo zypper in protonvpn-gui
