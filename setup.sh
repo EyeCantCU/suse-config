@@ -14,12 +14,12 @@ echo Installing packages...
 . scripts/install.sh
 
 # Setup wayland session
-echo Configuring Wayland...
-sudo cp conf/etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
+#echo Configuring Wayland...
+#sudo cp conf/etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
 
 # Autologin
-echo Configuring autologin
-echo -e "[Autologin]\nUser=$USER\nSession=plasmawayland" | sudo tee -a /etc/sddm.conf.d/autologin.conf > /dev/null
+#echo Configuring autologin
+#echo -e "[Autologin]\nUser=$USER\nSession=plasmawayland" | sudo tee -a /etc/sddm.conf.d/autologin.conf > /dev/null
 
 # Ham radio setup
 while true; do
