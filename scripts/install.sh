@@ -39,6 +39,10 @@ done
 echo Installing ProtonVPN...
 sudo zypper in protonvpn-gui
 
+# xbindkeys
+echo Installing xbindkeys...
+sudo zypper in xbindkeys
+
 # Flatpak
 echo Installing Tidal...
 flatpak install tidal-hifi

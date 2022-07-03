@@ -13,6 +13,14 @@ echo Removing packages...
 echo Installing packages...
 . scripts/install.sh
 
+# Scroll based zoom
+echo Enabling scroll based zoom...
+cp conf/xbindkeysrc ~/.xbindkeysrc
+killall xbindkeys
+xbindkeys
+echo Remember to add xbindkeys to autostart
+sleep 5 # Make sure this is seen
+
 # Setup wayland session
 #echo Configuring Wayland...
 #sudo cp conf/etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
