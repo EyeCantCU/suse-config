@@ -1,7 +1,6 @@
-# Copy over bashrc
-echo Updating path and default editor...
-cp conf/bashrc ~/.bashrc
-source ~/.bashrc
+# Perform initial configuration
+echo Running configuration script...
+python3 config.py
 
 # Add Flathub remote (user)
 echo Adding Flathub remote...
@@ -12,22 +11,6 @@ echo Removing packages...
 . scripts/remove.sh
 echo Installing packages...
 . scripts/install.sh
-
-# Scroll based zoom
-echo Enabling scroll based zoom...
-cp conf/xbindkeysrc ~/.xbindkeysrc
-killall xbindkeys
-xbindkeys
-echo Remember to add xbindkeys to autostart
-sleep 5 # Make sure this is seen
-
-# Setup wayland session
-#echo Configuring Wayland...
-#sudo cp conf/etc_sddm.conf.d_10-wayland.conf /etc/sddm.conf.d/10-wayland.conf
-
-# Autologin
-#echo Configuring autologin
-#echo -e "[Autologin]\nUser=$USER\nSession=plasmawayland" | sudo tee -a /etc/sddm.conf.d/autologin.conf > /dev/null
 
 # Ham radio setup
 while true; do
