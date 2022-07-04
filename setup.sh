@@ -2,15 +2,9 @@
 echo Running configuration script...
 python3 config.py
 
-# Add Flathub remote (user)
-echo Adding Flathub remote...
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-# Deal with packages
-echo Removing packages...
-. scripts/remove.sh
-echo Installing packages...
-. scripts/install.sh
+# Open package manager
+echo Launching package manager...
+python3 packages.py
 
 # Ham radio setup
 while true; do

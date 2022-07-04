@@ -1,0 +1,13 @@
+alsa-firmware
+android-tools
+android-udev-rules
+libnvidia-egl-wayland1
+libnvidia-egl-wayland1-32bit
+nvidia-computeG06
+nvidia-computeG06-32bit
+nvidia-glG06
+nvidia-glG06-32bit
+protonvpn-gui
+x11-video-nvidiaG06
+x11-video-nvidiaG06-32bit
+xbindkeys
