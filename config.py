@@ -1,11 +1,15 @@
 from getpass import getpass
 from subprocess import Popen, PIPE
+from sys import argv
 
 import os
 import shutil
 
-def config(cwd, password, user):
-    conf_dir = cwd + '/' + input("In which directory is your configuration stored? ") + '/'
+def config(cwd, password, setup, user):
+    if setup != True:
+        conf_dir = cwd + '/' + input("In which directory is your configuration stored? ") + '/'
+    else:
+        conf_dir = cwd + '/conf/'
 
     print ("Setting up your configuration...")
     for conf in os.scandir(conf_dir):
@@ -29,15 +33,20 @@ def config(cwd, password, user):
             shutil.copyfile(conf, dest)
             print("Copied " + conf.name + " to " + dest)
 
-    add_config = input("Would you like to perform additional configuration? (y/N) ")
-    if add_config == 'y' or add_config == 'Y':
-        config(cwd, password, user)
+    if setup != True:
+        add_config = input("Would you like to perform additional configuration? (y/N) ")
+        if add_config == 'y' or add_config == 'Y':
+            config(cwd, password, user, setup)
 
 def main():
     cwd = os.getcwd()
     user = os.getlogin()
     password = getpass("Enter your password (sudo): ")
+    setup = False
 
-    config(cwd, password, user)
+    if argv[1] == 'setup':
+        setup = True
+
+    config(cwd, password, setup, user)
 
 main()

@@ -1,10 +1,10 @@
 # Perform initial configuration
 echo Running configuration script...
-python3 config.py
+python3 config.py setup
 
 # Open package manager
 echo Launching package manager...
-python3 packages.py
+python3 packages.py setup
 
 # Ham radio setup
 while true; do
