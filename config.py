@@ -2,14 +2,17 @@ from getpass import getpass
 from subprocess import Popen, PIPE
 from sys import argv
 
+import glob
 import os
 import shutil
 
-def config(cwd, password, setup, user):
+def config(conf_index, cwd, password, setup, user):
     if setup != True:
         conf_dir = cwd + '/config/' + input("In which directory is your configuration stored? ") + '/'
     else:
-        conf_dir = cwd + '/config/general/'
+        conf_list = glob.glob(cwd + '/config/*/')
+        conf_dir = conf_list[conf_index]
+        conf_index += 1
 
     print("Setting up your configuration...")
     for conf in os.scandir(conf_dir):
@@ -37,6 +40,8 @@ def config(cwd, password, setup, user):
         add_config = input("Would you like to perform additional configuration? (y/N) ")
         if add_config == 'y' or add_config == 'Y':
             config(cwd, password, user, setup)
+    else:
+        config(conf_index, cwd, password, user, setup)
 
 def main():
     cwd = os.getcwd()
@@ -47,6 +52,6 @@ def main():
     if argv[1] == 'setup':
         setup = True
 
-    config(cwd, password, setup, user)
+    config(0, cwd, password, setup, user)
 
 main()
