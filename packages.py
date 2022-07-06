@@ -15,7 +15,7 @@ def elevated_cmd(cmd, password):
 
 def get_packages(file):
     cwd = os.getcwd() + '/'
-    file = cwd + file
+    file = cwd + '/settings/' + file
 
     packagestxt = open(file, 'r')
     packages = packagestxt.readlines()

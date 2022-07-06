@@ -7,11 +7,11 @@ import shutil
 
 def config(cwd, password, setup, user):
     if setup != True:
-        conf_dir = cwd + '/' + input("In which directory is your configuration stored? ") + '/'
+        conf_dir = cwd + '/config/' + input("In which directory is your configuration stored? ") + '/'
     else:
-        conf_dir = cwd + '/conf/'
+        conf_dir = cwd + '/config/general/'
 
-    print ("Setting up your configuration...")
+    print("Setting up your configuration...")
     for conf in os.scandir(conf_dir):
         dest = conf.name.replace('_', '/')
         if dest.startswith('root'):
