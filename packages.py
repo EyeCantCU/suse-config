@@ -78,9 +78,8 @@ def flatpak(setup):
                 print("Invalid option. Please enter 1 to 3\n")
                 continue
 
-def main():
+def packages_setup(setup):
     password = getpass("Enter your password (sudo): ")
-    setup = False
 
     if argv[1] == 'setup':
         setup = True
@@ -107,4 +106,4 @@ def main():
                 print("Invalid option. Please enter 1 to 4\n")
                 continue
 
-main()
+packages_setup(False)

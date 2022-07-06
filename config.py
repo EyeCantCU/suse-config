@@ -37,15 +37,14 @@ def config(conf_index, cwd, password, setup, user):
     else:
         config(conf_index, cwd, password, user, setup)
 
-def main():
+def config_setup(setup):
     cwd = getcwd() + '/'
     user = getlogin()
     password = getpass("Enter your password (sudo): ")
-    setup = False
 
     if argv[1] == 'setup':
         setup = True
 
     config(0, cwd, password, setup, user)
 
-main()
+config_setup(False)
