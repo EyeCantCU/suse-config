@@ -8,9 +8,9 @@ import shutil
 
 def config(conf_index, cwd, password, setup, user):
     if setup != True:
-        conf_dir = cwd + '/config/' + input("In which directory is your configuration stored? ") + '/'
+        conf_dir = cwd + 'config/' + input("In which directory is your configuration stored? ") + '/'
     else:
-        conf_list = glob.glob(cwd + '/config/*/')
+        conf_list = glob.glob(cwd + 'config/*/')
         conf_dir = conf_list[conf_index]
         conf_index += 1
 
@@ -44,7 +44,7 @@ def config(conf_index, cwd, password, setup, user):
         config(conf_index, cwd, password, user, setup)
 
 def main():
-    cwd = os.getcwd()
+    cwd = os.getcwd() + '/'
     user = os.getlogin()
     password = getpass("Enter your password (sudo): ")
     setup = False

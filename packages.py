@@ -15,7 +15,7 @@ def elevated_cmd(cmd, password):
 
 def get_packages(file):
     cwd = os.getcwd() + '/'
-    file = cwd + '/settings/' + file
+    file = cwd + 'settings/' + file
 
     packagestxt = open(file, 'r')
     packages = packagestxt.readlines()
@@ -78,7 +78,7 @@ def opi(password, setup):
 def flatpak(setup):
     opt = 1
     while True:
-        if setup != True
+        if setup != True:
             print("Flatpak Configuration:\n1. Add remote\n2. Install packages\n3. Exit\n")
             opt = int(input("Enter an option: "))
         match opt:
