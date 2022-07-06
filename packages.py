@@ -1,29 +1,7 @@
 from getpass import getpass
-from subprocess import Popen, PIPE
+from subprocess import run
 from sys import argv
-
-import os
-import subprocess
-
-def elevated_cmd(cmd, password):
-    run = Popen(
-        cmd.split(),
-        stdout=PIPE, stdin=PIPE,
-        stderr=PIPE
-    )
-    run.communicate(password.encode())
-
-def get_packages(file):
-    cwd = os.getcwd() + '/'
-    file = cwd + 'settings/' + file
-
-    packagestxt = open(file, 'r')
-    packages = packagestxt.readlines()
-    package_list = ''
-
-    for package in packages:
-        package_list += package + ' '
-    return package_list
+from tools import elevated_cmd, get_packages
 
 def zypper(password, setup):
     ar_zypp = 'sudo -S zypper --non-interactive --quiet ar -C ' # link name
@@ -89,11 +67,11 @@ def flatpak(setup):
                 remotes = remotestxt.readlines()
                 for remote in remotes:
                     install_remote = add_remote + remote
-                    subprocess.run(install_remote.split())
+                    run(install_remote.split())
             case 2:
                 opt += 1
                 fp_install = 'flatpak install ' + get_packages('flatpaks.txt')
-                subprocess.run(fp_install.split())
+                run(fp_install.split())
             case 3:
                 return
             case _:

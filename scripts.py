@@ -2,14 +2,7 @@ from getpass import getpass
 from subprocess import Popen, PIPE
 
 import os
-
-def elevated_cmd(cmd, password):
-    run = Popen(
-        cmd.split(),
-        stdout=PIPE, stdin=PIPE,
-        stderr=PIPE
-    )
-    run.communicate(password.encode())
+import tools
 
 def scripts():
     cwd = os.getcwd() + '/'
@@ -19,9 +12,8 @@ def scripts():
     with os.scandir(scripts_dir) as dir:
         for script in dir:
             if script.is_file():
-                print(script.name)
                 cmd = 'sudo -S ' + scripts_dir + script.name
-                elevated_cmd(cmd, password)
+                tools.elevated_cmd(cmd, password)
 
 def main():
     scripts()

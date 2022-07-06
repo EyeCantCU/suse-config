@@ -1,31 +1,25 @@
+from shutil import copyfile
 from getpass import getpass
-from subprocess import Popen, PIPE
+from glob import glob
+from os import getcwd, getlogin, scandir
 from sys import argv
-
-import glob
-import os
-import shutil
+from tools import elevated_cmd
 
 def config(conf_index, cwd, password, setup, user):
     if setup != True:
         conf_dir = cwd + 'config/' + input("In which directory is your configuration stored? ") + '/'
     else:
-        conf_list = glob.glob(cwd + 'config/*/')
+        conf_list = glob(cwd + 'config/*/')
         conf_dir = conf_list[conf_index]
         conf_index += 1
 
     print("Setting up your configuration...")
-    for conf in os.scandir(conf_dir):
+    for conf in scandir(conf_dir):
         dest = conf.name.replace('_', '/')
         if dest.startswith('root'):
             dest = dest.removeprefix('root')
             copy_conf = 'sudo -S cp ' + conf_dir + conf.name + ' ' + dest
-            copy = Popen(
-                copy_conf.split(),
-                stdin=PIPE, stdout=PIPE,
-                stderr=PIPE
-            )
-            copy.communicate(password.encode())
+            elevated_cmd(copy_conf, password)
             print("Copied " + conf.name + " to " + dest)
         else:
             dest = dest = "/home/" + user + "/"
@@ -33,7 +27,7 @@ def config(conf_index, cwd, password, setup, user):
                 dest += "." + conf.name
             else:
                 dest += conf.name
-            shutil.copyfile(conf, dest)
+            copyfile(conf, dest)
             print("Copied " + conf.name + " to " + dest)
 
     if setup != True:
@@ -44,8 +38,8 @@ def config(conf_index, cwd, password, setup, user):
         config(conf_index, cwd, password, user, setup)
 
 def main():
-    cwd = os.getcwd() + '/'
-    user = os.getlogin()
+    cwd = getcwd() + '/'
+    user = getlogin()
     password = getpass("Enter your password (sudo): ")
     setup = False
 
