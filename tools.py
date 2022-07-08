@@ -18,5 +18,7 @@ def get_packages(file):
     package_list = ''
 
     for package in packages:
+        package = package.removesuffix('\n')
+        print("* " + package)
         package_list += package + ' '
     return package_list

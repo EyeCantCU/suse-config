@@ -1,9 +1,10 @@
 from getpass import getpass
 from subprocess import run
+from os import getcwd
 from sys import argv
 from tools import elevated_cmd, get_packages
 
-def zypper(password, setup):
+def zypper(password, settings_dir, setup):
     ar_zypp = 'sudo -S zypper --non-interactive --quiet ar -C ' # link name
     ref_zypp = 'sudo -S zypper --gpg-auto-import-keys ref'
     in_zypp = 'sudo -S zypper in -y --auto-agree-with-licenses '
@@ -18,27 +19,31 @@ def zypper(password, setup):
             case 1:
                 opt += 1
                 print("Adding repos...\n")
-                repostxt = open('repos.txt', 'r')
+                repostxt = open(settings_dir + 'repos.txt', 'r')
                 repos = repostxt.readlines()
                 for repo in repos:
+                    repo_name = repo.split()[1]
+                    print("Adding repo: " + repo_name)
                     ar = ar_zypp + repo
                     elevated_cmd(ar, password)
                     elevated_cmd(ref_zypp, password)
             case 2:
                 opt += 1
-                print("Installing packages... (may take a while)\n")
+                print("Packages marked for installation:")
                 in_zypp += get_packages('zypper.txt')
                 elevated_cmd(in_zypp, password)
+                print("Packages installed.\n")
             case 3:
                 opt += 1
-                print("Removing packages...")
+                print("Packages marked for removal:")
                 rm_zypp += get_packages('remove.txt')
                 elevated_cmd(rm_zypp, password)
+                print("Packages removed.")
             case 4:
-                print("Returning to menu\n")
+                print("Returning to menu...\n")
                 return
             case _:
-                print("Invalid option. Please enter 1 to 4")
+                print("Invalid option. Please enter 1 to 4.")
                 continue
 
 def opi(password, setup):
@@ -51,9 +56,9 @@ def opi(password, setup):
         in_opi += get_packages('opi.txt')
         elevated_cmd(in_opi, password)
     else:
-        print("Returning to menu\n")
+        print("Returning to menu...\n")
 
-def flatpak(setup):
+def flatpak(settings_dir, setup):
     opt = 1
     while True:
         if setup != True:
@@ -63,23 +68,27 @@ def flatpak(setup):
             case 1:
                 opt += 1
                 add_remote = "flatpak remote-add --user --if-not-exists "
-                remotestxt = open('remotes.txt', 'r')
+                remotestxt = open(settings_dir + 'remotes.txt', 'r')
                 remotes = remotestxt.readlines()
                 for remote in remotes:
+                    remote_name = remote.split()[0]
+                    print("Adding remote: " + remote_name)
                     install_remote = add_remote + remote
-                    run(install_remote.split())
+                    run(install_remote.split(), shell=True)
             case 2:
                 opt += 1
-                fp_install = 'flatpak install ' + get_packages('flatpaks.txt')
-                run(fp_install.split())
+                fp_install = 'flatpak install -y ' + get_packages('flatpaks.txt')
+                run(fp_install.split(), shell=True)
             case 3:
+                print("Returning to menu...\n")
                 return
             case _:
-                print("Invalid option. Please enter 1 to 3\n")
+                print("Invalid option. Please enter 1 to 3.\n")
                 continue
 
 def packages_setup(setup):
     password = getpass("Enter your password (sudo): ")
+    settings_dir = getcwd() + '/settings/'
 
     if argv[1] == 'setup':
         setup = True
@@ -92,18 +101,18 @@ def packages_setup(setup):
         match opt:
             case 1:
                 opt += 1
-                zypper(password, setup)
+                zypper(password, settings_dir, setup)
             case 2:
                 opt += 1
                 opi(password, setup)
             case 3:
                 opt += 1
-                flatpak(setup)
+                flatpak(settings_dir, setup)
             case 4:
                 print("Exiting...\n")
                 return
             case _:
-                print("Invalid option. Please enter 1 to 4\n")
+                print("Invalid option. Please enter 1 to 4.\n")
                 continue
 
 packages_setup(False)

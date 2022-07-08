@@ -33,7 +33,7 @@ def config(conf_index, cwd, password, setup, user):
     if setup != True:
         add_config = input("Would you like to perform additional configuration? (y/N) ")
         if add_config == 'y' or add_config == 'Y':
-            config(cwd, password, user, setup)
+            config(conf_index, cwd, password, user, setup)
     else:
         config(conf_index, cwd, password, user, setup)
 
