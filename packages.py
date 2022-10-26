@@ -52,9 +52,11 @@ def opi(password, setup):
         opt = input("Install packages? (y/N) ")
     if opt == 'y' or opt == 'Y' or setup == True:
         print("Installing packages... (may take a while)\n")
-        in_opi = 'opi '
-        in_opi += get_packages('opi.txt')
-        elevated_cmd(in_opi, password)
+        in_opi = ''
+        packages = get_packages('opi.txt')
+        for package in packages:
+            in_opi = 'opi ' + package
+            elevated_cmd(in_opi, password)
     else:
         print("Returning to menu...\n")
 
@@ -77,8 +79,11 @@ def flatpak(settings_dir, setup):
                     run(install_remote.split(), shell=True)
             case 2:
                 opt += 1
-                fp_install = 'flatpak install -y ' + get_packages('flatpaks.txt')
-                run(fp_install.split(), shell=True)
+                fp_install = ''
+                packages = get_packages('flatpaks.txt')
+                for package in packages:
+                    fp_install = 'flatpak install -y ' + package
+                    run(fp_install.split(), shell=True)
             case 3:
                 print("Returning to menu...\n")
                 return
